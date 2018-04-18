@@ -1,7 +1,7 @@
 /*
-
+ 
 */
-#include<iostream>
+#include <iostream>
 #include <stdio.h>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -18,14 +18,17 @@ double beta;
 Mat src1,src2,src3,src4,src5,src6; //For six different images
 Mat dst; 
 static void on_trackbar( int, void* ){
-   alpha = (double) alpha_slider/alpha_slider_max ;
+   alpha = (double) alpha_slider/alpha_slider_max ; //typecasting 
    beta = ( 1.0 - alpha );
+   
    //First two images
    addWeighted( src2, alpha, src1, beta, 0.0, dst);
    imshow( "First Linear Blend", dst );
+   
    //Second two images
    addWeighted( src4, alpha, src3, beta, 0.0, dst);
    imshow( "Second Linear Blend", dst );
+   
    //Last two images
    addWeighted( src5, alpha, src6, beta, 0.0, dst);
    imshow( "Third Linear Blend", dst );
@@ -35,7 +38,7 @@ class Capture{
     private:
         Mat img,Rgb,Rgb1,image,Grey,output;  //creating a Mat object to store the frame later
         Mat LoadedImage,Binary,Step1;  //for loading saved image
-        VideoCapture cap;
+        VideoCapture cap; 
         string s1;
     public:
         int photo(){
@@ -69,7 +72,7 @@ class Capture{
             imwrite("Fifth.jpeg",Binary);
             //Changing the Grayscale image into Binary
             image= imread("First.jpeg");
-            inRange(image, cv::Scalar(0, 125, 0), cv::Scalar(255, 200, 255), output);
+            inRange(image,Scalar(0, 125, 0),Scalar(255, 200, 255), output);
             imwrite("Sixth.jpeg",output);
             return 0;
         } 
@@ -78,6 +81,7 @@ class Capture{
 
 class Process{
     private:
+    
     public:
         int Bar(){
             //Taking the saved images from the source
